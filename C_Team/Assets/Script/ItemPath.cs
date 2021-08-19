@@ -6,6 +6,7 @@ public class ItemPath : MonoBehaviour
 {
     public List<GameObject> items = new List<GameObject>();
     public float speed;
+    public float tempSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,16 @@ public class ItemPath : MonoBehaviour
 
     private void Move()
     {
-        transform.position = transform.position + new Vector3(0f, 0f, -Time.deltaTime * speed);
+        transform.position += -transform.forward * Time.deltaTime * speed;
+    }
+
+    public void Freeze()
+    {
+        tempSpeed = speed;
+        speed = 0;
+    }
+    public void Resume()
+    {
+        speed = tempSpeed;
     }
 }

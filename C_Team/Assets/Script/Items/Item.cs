@@ -4,31 +4,29 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public float hp;
+    public AttackArea attackArea;
+    public MeowEnergy meowEnergy;
     public bool canHit;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Init()
     {
-        
+        canHit = false;
+        meowEnergy = GameObject.Find("MeowEnergy").GetComponent<MeowEnergy>();
+        attackArea = GameObject.Find("AttackArea").GetComponent<AttackArea>();
     }
-    public virtual void Hit()
+    public virtual void Hit(float damage)
     {
         if (!canHit) return;
-        Debug.Log("Hit!!!");
-        
+        //Debug.Log("Hit!!!");
     }
     public virtual void Hurt()
     {
         //Debug.Log("Hurt OAO");
+        meowEnergy.Change(-20f);
     }
     public virtual void Recycle()
     {
         //Debug.Log("Recycle -_-");
+        gameObject.SetActive(false);
     }
 }

@@ -11,6 +11,7 @@ public class MeowEnergy : MonoBehaviour
     {
         get { return _energy; }
         set { _energy = value;
+            _energy = (_energy > 100f) ? 100f : (_energy < 0f) ? 0f : _energy;
               ApplyEnergy(); }
     }
 
@@ -34,10 +35,11 @@ public class MeowEnergy : MonoBehaviour
     {
         energy -= Time.deltaTime * DecreaseByTimeRatio;
     }
-    public void Decrease(float amount)
+    public void Change(float amount)
     {
-        energy -= amount;
+        energy += amount;
     }
+    
     public void ApplyEnergy()
     {
         slider.value = energy;

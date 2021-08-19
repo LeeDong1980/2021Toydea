@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Charge : MonoBehaviour
 {
-    private Slider slider;
+    public Slider slider;
     public float _chargeValue;
     public float chargeValue
     {

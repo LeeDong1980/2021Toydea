@@ -20,20 +20,38 @@ public class AttackArea : MonoBehaviour
     public void ApplyAttack(bool isCharge)
     {
         if (!item) return;
-        if (isCharge)
+        if(item is PressAttackItem)
         {
-            Debug.Log("Charge Attack!!!");
-            item.Hit();
+            //Debug.Log("是魚魚哇");
         }
         else
         {
-            Debug.Log("Normal Attack");
-            item.Hit();
+            if (isCharge)
+            {
+                //Debug.Log("Charge Attack!!!");
+                item.Hit(20f);
+            }
+            else
+            {
+                //Debug.Log("Normal Attack");
+                item.Hit(10f);
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         item = other.GetComponent<Item>();
+        item.canHit = true;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        item.canHit = false;
+        ClearCurrentItem();
+    }
+
+    public void ClearCurrentItem()
+    {
+        item = null;
     }
 }
