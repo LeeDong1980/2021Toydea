@@ -19,13 +19,16 @@ public class AttackArea : MonoBehaviour
 
     public void ApplyAttack(bool isCharge)
     {
+        if (!item) return;
         if (isCharge)
         {
             Debug.Log("Charge Attack!!!");
+            item.Hit();
         }
         else
         {
             Debug.Log("Normal Attack");
+            item.Hit();
         }
     }
 

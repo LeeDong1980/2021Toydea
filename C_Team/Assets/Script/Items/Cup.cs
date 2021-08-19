@@ -19,6 +19,7 @@ public class Cup : Item
     public override void Hit()
     {
         base.Hit();
+        Destroy(gameObject);
     }
     public override void Hurt()
     {

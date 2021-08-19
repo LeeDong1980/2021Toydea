@@ -21,13 +21,14 @@ public class Item : MonoBehaviour
     {
         if (!canHit) return;
         Debug.Log("Hit!!!");
+        
     }
     public virtual void Hurt()
     {
-        Debug.Log("Hurt OAO");
+        //Debug.Log("Hurt OAO");
     }
     public virtual void Recycle()
     {
-        Debug.Log("Recycle -_-");
+        //Debug.Log("Recycle -_-");
     }
 }

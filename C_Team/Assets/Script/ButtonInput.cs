@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ButtonInput : MonoBehaviour
 {
-    public float chargeValue;
-    public float chargeRatio;
-    public float chargeThreshold;
-
+    public Charge chargeScript;
     public AttackArea attackArea;
 
     // Start is called before the first frame update
     void Start()
     {
         attackArea = GameObject.Find("AttackArea").GetComponent<AttackArea>();
+        chargeScript.ReleaseCharge();
     }
 
     // Update is called once per frame
@@ -21,23 +20,16 @@ public class ButtonInput : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            Charge();
+            chargeScript.IncreaseCharge();
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
             Attack();
-            ReleaseCharge();
+            chargeScript.ReleaseCharge();
         }
     }
 
-    private void Charge()
-    {
-        chargeValue += chargeRatio;
-    }
-    private void ReleaseCharge()
-    {
-        chargeValue = 0;
-    }
+    
 
     private void Attack()
     {
@@ -45,15 +37,8 @@ public class ButtonInput : MonoBehaviour
         {
             Debug.LogError("Missing AttackArea!");
         }
-        if(chargeValue < chargeThreshold)
-        {
-            //Apply normal attack
-            attackArea.ApplyAttack(false);
-        }
-        else
-        {
-            //Apply charge attck
-            attackArea.ApplyAttack(true);
-        }
+        //Apply charge attck
+        attackArea.ApplyAttack(chargeScript.CheckCharged());
     }
+    
 }
